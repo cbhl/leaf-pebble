@@ -12,18 +12,36 @@ PBL_APP_INFO(MY_UUID,
 
 Window window;
 
+BmpContainer image_container;
 
 void handle_init(AppContextRef ctx) {
   (void)ctx;
 
   window_init(&window, "Window Name");
   window_stack_push(&window, true /* Animated */);
+
+  resource_init_current_app(&FEATURE_LEAF_RESOURCES);
+
+  // Note: This needs to be "de-inited" in the application's
+  //       deinit handler.
+  bmp_init_container(RESOURCE_ID_IMAGE_LEAF, &image_container);
+
+  layer_add_child(&window.layer, &image_container.layer.layer);
+}
+
+
+void handle_deinit(AppContextRef ctx) {
+  (void)ctx;
+
+  // Note: Failure to de-init this here will result in a memory leak.
+  bmp_deinit_container(&image_container);
 }
 
 
 void pbl_main(void *params) {
   PebbleAppHandlers handlers = {
-    .init_handler = &handle_init
+    .init_handler = &handle_init,
+    .deinit_handler = &handle_deinit
   };
   app_event_loop(params, &handlers);
 }
