@@ -1,11 +1,11 @@
-
-{"friendlyVersion": "VERSION",
- "versionDefName": "VERSION",
- "media": [
-	   {
-	    "type":"raw",
-	    "defName":"DUMMY",
-	    "file":"resource_map.json"
-	   }
-	  ]
+{
+    "friendlyVersion": "dev_0.1",
+    "versionDefName": "FEATURE_LEAF_RESOURCES",
+    "media": [
+        {
+            "type":"png",
+            "defName":"IMAGE_LEAF",
+            "file":"images/leaf.png"
+        }
+    ]
 }
